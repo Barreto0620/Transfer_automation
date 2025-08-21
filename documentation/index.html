@@ -53,6 +53,27 @@
             z-index: 9999;
             transition: width 0.2s ease-out;
         }
+        
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px; /* Optional: adds rounded corners to the video */
+            margin: 20px auto; /* Centraliza o vídeo horizontalmente */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 900px; /* Adiciona uma largura máxima */
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -151,6 +172,16 @@
                         <h1>Documentação: Transfer automation</h1>
                         <p>Este projeto é como um <strong>assistente digital</strong> que <em>automatiza</em> a tediosa tarefa de mover arquivos e pastas no seu computador. Ele lê todas as instruções de transferência de uma <em>planilha</em>, depois usa <strong>ações simuladas de mouse e teclado</strong> para copiar itens de um local e colá-los em outro, até mesmo lidando com complicadas <em>janelas pop-up</em> como prompts de segurança ou avisos "substituir arquivo". Finalmente, ele mantém um <em>log</em> detalhado de tudo o que fez e atualiza a planilha original.</p>
                         
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/wk62Oqq6JTs" 
+                                title="Managed File Transfer Automation Isn't as Complex as You Think" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+
                         <div class="features-grid">
                             <div class="feature-card">
                                 <div class="feature-icon">
@@ -656,7 +687,7 @@ def lidar_dialogo_substituir():
                 <p>É aqui que entra o <strong>Windows Dialog Handler</strong>! Pense nele como um "solucionador de problemas" especializado ou "segurança" para o processo de automação. Seu trabalho é <strong>detectar e interagir automaticamente com janelas pop-up cruciais</strong> que podem interromper a transferência, garantindo que a automação continue suavemente sem travar.</p>
 
                 <h3>Que Problema Ele Resolve?</h3>
-                <p>Imagine que você está tentando copiar centenas de arquivos. Você solta sua automação, e ela está indo muito bem. But then, it encounters a roadblock:</p>
+                <p>Imagine que você está tentando copiar centenas de arquivos. Você solta sua automação, e ela está indo muito bem. Mas então, ela encontra um obstáculo:</p>
 
                 <div class="professional-list">
                     <ul>
