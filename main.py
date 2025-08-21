@@ -1,17 +1,3 @@
-"""file_bridge_automation.py – Automação ponte guiada por planilha
-----------------------------------------------------------------
-► Planilha (CSV ou XLSX) com colunas **COPIAR**, **COLAR**, opcional **STATUS**.
-► Pula linhas já marcadas **OK** e prossegue.
-► Copia/cola via teclado, aceita “Substituir” e atualiza STATUS.
-► Mostra resumo em mensagem pop‑up **e** grava em arquivo *transfer_log.txt* no mesmo diretório da planilha.
-► Fecha Explorers somente após concluir tudo.
-
-Dependências
-```
-pip install pyautogui pygetwindow python-dotenv pandas openpyxl
-```
-"""
-
 import os
 import sys
 import time
