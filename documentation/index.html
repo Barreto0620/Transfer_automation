@@ -7,11 +7,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%23004B87'><rect x='4' y='18' width='6' height='10' rx='1'></rect><rect x='13' y='10' width='6' height='18' rx='1'></rect><rect x='22' y='4' width='6' height='24' rx='1'></rect></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23004B87' d='M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288L224 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64z'/></svg>">
     
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #004B87;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* Reading Progress Bar */
+        .reading-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px; /* Adjust thickness as needed */
+            background-color: #004B87; /* Match your brand color */
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.2s ease-out;
+        }
+    </style>
 </head>
 <body>
+    <div id="reading-progress-bar" class="reading-progress-bar"></div>
+
     <header class="header">
         <div class="header-content">
             <a href="#overview" class="logo">
@@ -610,7 +656,7 @@ def lidar_dialogo_substituir():
                 <p>É aqui que entra o <strong>Windows Dialog Handler</strong>! Pense nele como um "solucionador de problemas" especializado ou "segurança" para o processo de automação. Seu trabalho é <strong>detectar e interagir automaticamente com janelas pop-up cruciais</strong> que podem interromper a transferência, garantindo que a automação continue suavemente sem travar.</p>
 
                 <h3>Que Problema Ele Resolve?</h3>
-                <p>Imagine que você está tentando copiar centenas de arquivos. Você solta sua automação, e ela está indo muito bem. Mas então, ela encontra um obstáculo:</p>
+                <p>Imagine que você está tentando copiar centenas de arquivos. Você solta sua automação, e ela está indo muito bem. But then, it encounters a roadblock:</p>
 
                 <div class="professional-list">
                     <ul>
@@ -929,13 +975,43 @@ messagebox.showinfo("Transferência Concluída", resumo)</code></pre>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 Dashboard de Vendas - Todos os direitos reservados. | <a href="https://github.com/WebCash-inc" target="_blank">Visite nosso GitHub</a></p>
+        <p>&copy; 2025 Transfer Automation - Todos os direitos reservados. | <a href="https://github.com/WebCash-inc" target="_blank">Visite nosso GitHub</a></p>
     </footer>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo da página">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
     <script src="script.js"></script>
+    
+    <script>
+        // Smooth scroll to top and show/hide button logic
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        // Reading Progress Bar Logic
+        const progressBar = document.getElementById('reading-progress-bar');
+        
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollProgress = (window.scrollY / totalHeight) * 100;
+            progressBar.style.width = scrollProgress + '%';
+        });
+    </script>
 </body>
-</html>C:\Relatorios\</code>.</li>
-                        <li>Clicar em <code>Mensal.xlsx</code>.</li>
-                        <li>Pressionar <code>Ctrl + C</code> (Copiar).</li>
-                        <li>Navegar para <code>
+</html>

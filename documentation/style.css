@@ -1,20 +1,20 @@
 :root {
-    /* Power BI Themed Colors */
-    --primary: #F2C811;
-    --primary-dark: #D8B000;
-    --secondary: #004B87;
-    --accent: #00BCF2;
-    --success: #107C10;
-    --warning: #FF8C00;
-    --error: #D13438;
+    /* Deep Ocean Professional Palette */
+    --primary: #0B4D6A;
+    --primary-dark: #073A52;
+    --secondary: #1B8AAE;
+    --accent: #7FCDCD;
+    --success: #00A693;
+    --warning: #F2A900;
+    --error: #D73527;
     
-    /* Power BI Brand Colors */
-    --powerbi-yellow: #F2C811;
-    --powerbi-blue: #004B87;
-    --powerbi-cyan: #00BCF2;
-    --powerbi-teal: #40E0D0;
-    --powerbi-purple: #6B69D6;
-    --powerbi-red: #E74856;
+    /* Ocean Depth Colors */
+    --ocean-deep: #0B4D6A;
+    --ocean-teal: #1B8AAE;
+    --ocean-mint: #7FCDCD;
+    --ocean-coral: #FF6B6B;
+    --ocean-pearl: #E8F4F8;
+    --ocean-navy: #0A3D56;
     
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
@@ -30,9 +30,9 @@
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     
-    --gradient-primary: linear-gradient(135deg, #F2C811 0%, #004B87 100%);
-    --gradient-secondary: linear-gradient(135deg, #00BCF2 0%, #6B69D6 100%);
-    --gradient-accent: linear-gradient(135deg, #40E0D0 0%, #00BCF2 100%);
+    --gradient-primary: linear-gradient(135deg, #0B4D6A 0%, #1B8AAE 100%);
+    --gradient-secondary: linear-gradient(135deg, #7FCDCD 0%, #1B8AAE 100%);
+    --gradient-accent: linear-gradient(135deg, #E8F4F8 0%, #7FCDCD 100%);
 }
 
 body.dark {
@@ -180,7 +180,7 @@ body {
 
 .theme-toggle:hover {
     background: var(--primary);
-    color: var(--secondary);
+    color: white;
     border-color: var(--primary);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
@@ -259,11 +259,11 @@ body {
     font-size: 1.1rem;
     width: 20px;
     text-align: center;
-    color: var(--powerbi-cyan);
+    color: var(--ocean-mint);
 }
 
 .nav-link.active i {
-    color: var(--powerbi-yellow);
+    color: var(--ocean-pearl);
 }
 
 /* Main Content */
@@ -325,7 +325,7 @@ body {
 .section h3 {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--powerbi-cyan);
+    color: var(--ocean-teal);
     margin: 2.5rem 0 1.5rem 0;
     position: relative;
     padding-left: 1rem;
@@ -339,7 +339,7 @@ body {
     transform: translateY(-50%);
     width: 4px;
     height: 20px;
-    background: var(--powerbi-yellow);
+    background: var(--ocean-coral);
     border-radius: 2px;
 }
 
@@ -423,7 +423,7 @@ body {
 .feature-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-xl);
-    border-color: var(--powerbi-cyan);
+    border-color: var(--ocean-mint);
 }
 
 .feature-icon {
@@ -456,7 +456,7 @@ body {
 .content-box {
     background: var(--bg-secondary);
     border: 1px solid var(--border-light);
-    border-left: 4px solid var(--powerbi-cyan);
+    border-left: 4px solid var(--ocean-teal);
     border-radius: 12px;
     padding: 2rem;
     margin: 2.5rem 0;
@@ -465,18 +465,18 @@ body {
 }
 
 .content-box.highlight {
-    border-left-color: var(--powerbi-yellow);
-    background: linear-gradient(135deg, rgba(242, 200, 17, 0.05) 0%, transparent 50%);
+    border-left-color: var(--ocean-coral);
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, transparent 50%);
 }
 
 .content-box.important {
-    border-left-color: var(--powerbi-red);
-    background: linear-gradient(135deg, rgba(231, 72, 86, 0.05) 0%, transparent 50%);
+    border-left-color: var(--ocean-deep);
+    background: linear-gradient(135deg, rgba(11, 77, 106, 0.05) 0%, transparent 50%);
 }
 
 .content-box.success {
     border-left-color: var(--success);
-    background: linear-gradient(135deg, rgba(16, 124, 16, 0.05) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(0, 166, 147, 0.05) 0%, transparent 50%);
 }
 
 /* Enhanced Lists */
@@ -514,9 +514,9 @@ body {
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    background: var(--powerbi-cyan);
+    background: var(--ocean-mint);
     border-radius: 50%;
-    box-shadow: 0 0 0 2px rgba(0, 188, 242, 0.2);
+    box-shadow: 0 0 0 2px rgba(127, 205, 205, 0.2);
 }
 
 .professional-list li strong {
@@ -545,7 +545,7 @@ body {
 }
 
 .code-header i {
-    color: var(--powerbi-yellow);
+    color: var(--ocean-coral);
 }
 
 pre {
@@ -560,7 +560,7 @@ pre {
 }
 
 code {
-    background: var(--powerbi-cyan);
+    background: var(--ocean-teal);
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 6px;
@@ -605,7 +605,7 @@ td strong {
 }
 
 tbody tr:hover {
-    background: linear-gradient(135deg, rgba(0, 188, 242, 0.05) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(127, 205, 205, 0.05) 0%, transparent 50%);
 }
 
 tbody tr:last-child td {
@@ -615,7 +615,7 @@ tbody tr:last-child td {
 /* Architecture Diagram */
 .architecture-diagram {
     background: var(--bg-secondary);
-    border: 2px solid var(--powerbi-cyan);
+    border: 2px solid var(--ocean-mint);
     border-radius: 20px;
     padding: 2rem;
     margin: 3rem 0;
@@ -630,7 +630,7 @@ tbody tr:last-child td {
 /* Blockquotes */
 blockquote {
     background: var(--bg-secondary);
-    border-left: 4px solid var(--powerbi-yellow);
+    border-left: 4px solid var(--ocean-coral);
     border-radius: 12px;
     padding: 2rem;
     margin: 2rem 0;
@@ -641,7 +641,7 @@ blockquote {
 blockquote::before {
     content: '"';
     font-size: 4rem;
-    color: var(--powerbi-yellow);
+    color: var(--ocean-coral);
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -659,7 +659,7 @@ blockquote p {
 
 /* Enhanced Links */
 a {
-    color: var(--powerbi-cyan);
+    color: var(--ocean-teal);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
@@ -667,8 +667,8 @@ a {
 }
 
 a:hover {
-    border-bottom-color: var(--powerbi-cyan);
-    color: var(--secondary);
+    border-bottom-color: var(--ocean-teal);
+    color: var(--ocean-coral);
 }
 
 /* Professional Badges */
@@ -677,8 +677,8 @@ a:hover {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: var(--powerbi-cyan);
-    color: white;
+    background: var(--ocean-mint);
+    color: var(--ocean-navy);
     border-radius: 20px;
     font-size: 0.875rem;
     font-weight: 600;
@@ -686,8 +686,8 @@ a:hover {
 }
 
 .badge.primary {
-    background: var(--powerbi-yellow);
-    color: var(--secondary);
+    background: var(--ocean-coral);
+    color: white;
 }
 
 .badge.secondary {
@@ -714,7 +714,7 @@ a:hover {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--powerbi-cyan);
+    background: var(--ocean-mint);
 }
 
 .status-indicator.success::before {
@@ -739,12 +739,12 @@ a:hover {
 }
 
 .footer a {
-    color: var(--powerbi-yellow);
+    color: var(--ocean-pearl);
     font-weight: 600;
 }
 
 .footer a:hover {
-    border-bottom-color: var(--powerbi-yellow);
+    border-bottom-color: var(--ocean-pearl);
 }
 
 /* Mobile Responsiveness */
@@ -859,7 +859,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--powerbi-cyan);
+    background: var(--ocean-mint);
     border-radius: 4px;
 }
 
@@ -891,7 +891,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 75, 135, 0.5);
+    background: rgba(11, 77, 106, 0.5);
     z-index: 998;
     opacity: 0;
     transition: opacity 0.3s ease;
