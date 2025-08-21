@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação Transfer Automation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e67e22'/><path d='M25 30h50v8H25zm0 16h50v8H25zm0 16h35v8H25z' fill='white'/><path d='M65 62l8-8 8 8-8 8z' fill='white'/></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="#e67e22" rx="8"/>
+                        <path d="M20 25h60v8H20zm0 16h60v8H20zm0 16h45v8H20z" fill="white"/>
+                        <path d="M70 57l12-12 12 12-12 12z" fill="white"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Transfer Automation</span>
+            </div>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Dark</span>
+            </button>
+        </header>
+
+        <nav id="sidebar">
+            <h1>Documentação</h1>
+            <ul>
+                <li><a href="#overview">Visão Geral</a></li>
+                <li><a href="#chapter1">Capítulo 1: Interface de Usuário</a></li>
+                <li><a href="#chapter2">Capítulo 2: Orquestrador de Fluxo</a></li>
+                <li><a href="#chapter3">Capítulo 3: Gerenciador de Planilhas</a></li>
+                <li><a href="#chapter4">Capítulo 4: Motor de Automação UI</a></li>
+                <li><a href="#chapter5">Capítulo 5: Handler de Diálogos</a></li>
+                <li><a href="#chapter6">Capítulo 6: Logging e Relatórios</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+            <section id="overview" class="overview">
+                <h1>Documentação - Transfer Automation</h1>
+                <p>O <code>Transfer Automation</code> é uma ferramenta projetada para <strong>automatizar transferências de arquivos em lote</strong> através de simulação de interface gráfica. Ele lê instruções de transferência de uma planilha e usa ações simuladas de mouse e teclado para copiar itens de um local e colá-los em outro, lidando com janelas pop-up como prompts de segurança ou avisos de "substituir arquivo".</p>
+                <hr style="margin: 1.5rem 0;">
+                <h2>Visão Geral do Fluxo</h2>
+                <div class="mermaid">
+                    flowchart TD
+                        A0["Motor de Automação UI"]
+                        A1["Gerenciador de Planilhas"]
+                        A2["Orquestrador de Fluxo de Trabalho"]
+                        A3["Logging e Relatórios Operacionais"]
+                        A4["Interface de Entrada do Usuário"]
+                        A5["Handler de Diálogos do Windows"]
+                        A4 -- "Fornece caminho da planilha" --> A1
+                        A4 -- "Fornece credenciais" --> A2
+                        A4 -- "Define caminho do log" --> A3
+                        A1 -- "Fornece tarefas" --> A2
+                        A2 -- "Executa ações da UI" --> A0
+                        A0 -- "Utiliza handlers de diálogo" --> A5
+                        A2 -- "Atualiza progresso" --> A1
+                        A2 -- "Gera relatórios" --> A3
+                </div>
+            </section>
+
+            <hr>
+
+            <section id="chapter1">
+                <h1>Capítulo 1: Interface de Entrada do Usuário</h1>
+                <p>Bem-vindo ao projeto <strong>Transfer Automation</strong>! Esta ferramenta é projetada para facilitar sua vida automatizando a cópia e colagem de arquivos e pastas baseada em uma lista simples que você fornece. Mas antes de começar sua mágica, ela precisa de algumas informações suas.</p>
+                <h3>O que a Interface resolve?</h3>
+                <p>Pense nisso como contratar alguém para fazer um trabalho - você primeiro precisa dizer <em>o que</em> fazer e <em>onde</em> encontrar as instruções. Nosso script de automação é similar. Ele precisa saber:</p>
+                <ul>
+                    <li><strong>Onde está a lista de arquivos para transferir?</strong> (Esta lista geralmente está em uma planilha)</li>
+                    <li><strong>Preciso de usuário e senha para acessar pastas de rede?</strong> (Às vezes, drives de rede são protegidos e precisam de credenciais)</li>
+                </ul>
+                <h3>Como ela coleta informações?</h3>
+                <p>O componente "Interface de Entrada do Usuário" usa uma ferramenta especial chamada <code>tkinter</code>. O <code>tkinter</code> é uma parte padrão do Python que ajuda a criar janelas gráficas simples e botões.</p>
+                <pre><code>import tkinter as tk
+from tkinter import simpledialog
+
+# Prepara o sistema de pop-up
+root = tk.Tk()
+root.withdraw() # Esconde a janela principal vazia
+
+# Pergunta ao usuário pelo caminho da planilha
+sheet_path = simpledialog.askstring(
+    title="Caminho da Planilha",
+    prompt="Digite onde sua planilha está (ex: C:\\dados\\minhas_tarefas.xlsx):"
+)
+
+# Remove aspas se existirem
+sheet_path = sheet_path.strip('"') if sheet_path else None</code></pre>
+                <blockquote>A Interface de Entrada é a face acolhedora do projeto, coletando informações cruciais através de janelas pop-up simples para garantir que o script tenha todos os parâmetros necessários.</blockquote>
+            </section>
+
+            <hr>
+
+            <section id="chapter2">
+                <h1>Capítulo 2: Orquestrador de Fluxo de Trabalho</h1>
+                <p>No Capítulo 1, você aprendeu como nossa ferramenta de automação coleta informações essenciais. Agora que o script tem suas instruções, é hora de falar sobre o "cérebro" da operação: o <strong>Orquestrador de Fluxo de Trabalho</strong>.</p>
+                <h3>O que o Orquestrador resolve?</h3>
+                <p>Imagine que você deu a um gerente de projeto uma longa lista de tarefas para completar. Este gerente precisa:</p>
+                <ol>
+                    <li>Percorrer a lista item por item</li>
+                    <li>Atribuir cada tarefa ao membro certo da equipe</li>
+                    <li>Acompanhar o que está feito, o que foi pulado, e o que deu errado</li>
+                    <li>Garantir que todo o projeto avance suavemente</li>
+                </ol>
+                <h3>Fluxo de Processamento:</h3>
+                <table>
+                    <tr><th>Etapa</th><th>Ação</th><th>Resultado</th></tr>
+                    <tr><td>1. Verificação</td><td>Checa status da tarefa</td><td>Pula se já OK</td></tr>
+                    <tr><td>2. Abertura</td><td>Abre local de origem</td><td>Janela do Explorer</td></tr>
+                    <tr><td>3. Cópia</td><td>Seleciona e copia item</td><td>Item na área de transferência</td></tr>
+                    <tr><td>4. Destino</td><td>Abre local de destino</td><td>Pasta de destino aberta</td></tr>
+                    <tr><td>5. Colagem</td><td>Cola o item copiado</td><td>Transferência concluída</td></tr>
+                </table>
+                <pre><code># Loop principal do orquestrador
+for i, row in df.iterrows():
+    status_now = str(row.get("STATUS", "")).strip().upper()
+    
+    if status_now == "OK":
+        skipped += 1
+        continue
+    
+    try:
+        # Executa transferência
+        win_src = open_path(src, username, password)
+        copy_selection(not is_file(src))
+        win_dst = open_path(dst, username, password)
+        paste_in_folder()
+        
+        df.at[i, "STATUS"] = "OK"
+        processed += 1
+    except Exception as e:
+        df.at[i, "STATUS"] = "ERRO"
+        errors += 1</code></pre>
+                <blockquote>O Orquestrador é o maestro que coordena todos os componentes, garantindo que cada transferência seja executada na ordem correta e com tratamento adequado de erros.</blockquote>
+            </section>
+
+            <hr>
+
+            <section id="chapter3">
+                <h1>Capítulo 3: Gerenciador de Dados de Planilha</h1>
+                <p>O Gerenciador de Dados de Planilha é o "bibliotecário" do projeto. Seu trabalho é lidar eficientemente com todas as informações da sua planilha, garantindo que o resto do script tenha instruções precisas e atualizadas.</p>
+                <h3>O que o Gerenciador resolve?</h3>
+                <p>Imagine que suas tarefas de transferência estão escritas em uma longa lista. Para nosso script de automação funcionar, ele precisa:</p>
+                <ul>
+                    <li><strong>Ler a Lista:</strong> Abrir o arquivo da planilha e entender todas as linhas e colunas</li>
+                    <li><strong>Organizar Informações:</strong> Extrair informações específicas como "de onde copiar" e "para onde colar"</li>
+                    <li><strong>Atualizar Progresso:</strong> Se uma tarefa for concluída, precisa ser marcada como "feita"</li>
+                    <li><strong>Salvar Alterações:</strong> Garantir que todas as marcações sejam salvas de volta na planilha</li>
+                </ul>
+                <h3>Estrutura da Planilha:</h3>
+                <table>
+                    <tr><th>Coluna</th><th>Função</th><th>Exemplo</th></tr>
+                    <tr><td>COPIAR</td><td>Caminho de origem</td><td>C:\Documentos\Relatorio.pdf</td></tr>
+                    <tr><td>COLAR</td><td>Caminho de destino</td><td>\\RedeCompartilhada\Relatorios\</td></tr>
+                    <tr><td>STATUS</td><td>Estado da transferência</td><td>OK, ERRO ou vazio</td></tr>
+                </table>
+                <pre><code>import pandas as pd
+
+# Carregamento da planilha
+if sheet_path.lower().endswith(".xlsx"):
+    df = pd.read_excel(sheet_path, dtype=str, engine="openpyxl")
+elif sheet_path.lower().endswith(".csv"):
+    df = pd.read_csv(sheet_path, dtype=str)
+
+# Normalização de colunas
+df.columns = [str(c).upper() for c in df.columns]
+if "STATUS" not in df.columns:
+    df["STATUS"] = ""</code></pre>
+                <blockquote>O Gerenciador de Planilhas utiliza a poderosa biblioteca pandas para ler, organizar e atualizar eficientemente os dados das tarefas de transferência.</blockquote>
+            </section>
+
+            <hr>
+
+            <section id="chapter4">
+                <h1>Capítulo 4: Motor de Automação UI</h1>
+                <p>O Motor de Automação UI são as "mãos e olhos" do script para a interface gráfica do seu computador. Ele permite que nosso script de automação aja como um usuário humano, imitando suas teclas e movimentos do mouse.</p>
+                <h3>O que o Motor resolve?</h3>
+                <p>Imagine que você precisa copiar manualmente um arquivo de <code>C:\Relatorios\Mensal.xlsx</code> para <code>\\RedeCompartilhada\Arquivos\</code>. Você faria:</p>
+                <ol>
+                    <li>Abrir o Explorador de Arquivos</li>
+                    <li>Navegar para <code>C:\Relatorios\</code></li>
+                    <li>Clicar em <code>Mensal.xlsx</code></li>
+                    <li>Pressionar <code>Ctrl + C</code> (Copiar)</li>
+                    <li>Navegar para <code>\\RedeCompartilhada\Arquivos\</code></li>
+                    <li>Pressionar <code>Ctrl + V</code> (Colar)</li>
+                </ol>
+                <h3>Bibliotecas do Motor:</h3>
+                <table>
+                    <tr><th>Biblioteca</th><th>Função</th><th>Uso Principal</th></tr>
+                    <tr><td>pyautogui</td><td>As "Mãos"</td><td>Simula teclas e cliques do mouse</td></tr>
+                    <tr><td>pygetwindow</td><td>Os "Olhos"</td><td>Encontra e controla janelas específicas</td></tr>
+                </table>
+                <pre><code>import pyautogui as pg
+import pygetwindow as gw
+
+def run_command(cmd: str):
+    pg.hotkey("winleft", "r")  # Win + R
+    time.sleep(0.4)
+    pg.write(cmd, interval=0.02)  # Digita o comando
+    pg.press("enter")
+    time.sleep(2)
+    return gw.getActiveWindow()
+
+def copy_selection(is_folder: bool):
+    if is_folder:
+        pg.hotkey("ctrl", "a")  # Seleciona tudo
+    pg.hotkey("ctrl", "c")      # Copia
+    time.sleep(0.5)</code></pre>
+                <blockquote>O Motor de Automação UI é o executor ativo que usa pyautogui como "mãos" e pygetwindow como "olhos" para interagir com a interface gráfica do sistema.</blockquote>
+            </section>
+
+            <hr>
+
+            <section id="chapter5">
+                <h1>Capítulo 5: Handler de Diálogos do Windows</h1>
+                <p>O Handler de Diálogos do Windows é um "solucionador de problemas" especializado para o processo de automação. Seu trabalho é <strong>detectar e interagir automaticamente com janelas pop-up cruciais</strong> que podem interromper a transferência.</p>
+                <h3>O que o Handler resolve?</h3>
+                <p>Imagine que você está tentando copiar centenas de arquivos automaticamente, mas então encontra obstáculos:</p>
+                <ul>
+                    <li><strong>Acesso à Rede:</strong> O script tenta abrir uma pasta em um drive de rede, e um diálogo "Segurança do Windows" aparece pedindo usuário e senha</li>
+                    <li><strong>Arquivos Duplicados:</strong> O script tenta colar um arquivo, mas já existe um arquivo com o mesmo nome no destino</li>
+                </ul>
+                <h3>Diálogos Suportados:</h3>
+                <table>
+                    <tr><th>Tipo de Diálogo</th><th>Títulos Reconhecidos</th><th>Ação</th></tr>
+                    <tr><td>Login de Rede</td><td>"Segurança do Windows", "Windows Security"</td><td>Digita credenciais</td></tr>
+                    <tr><td>Substituir Arquivo</td><td>"Substituir ou Ignorar Arquivos"</td><td>Pressiona Enter</td></tr>
+                    <tr><td>Controle UAC</td><td>"Controle de Conta de Usuário"</td><td>Confirma ação</td></tr>
+                </table>
+                <pre><code>def login_popup(username: str, password: str):
+    if not username or not password:
+        return
+    titles = [
+        "Segurança do Windows", "Windows Security",
+        "Credenciais de Rede", "Network Credentials"
+    ]
+    for _ in range(60):
+        for t in titles:
+            if gw.getWindowsWithTitle(t):
+                pg.write(username)
+                pg.press("tab")
+                pg.write(password)
+                pg.press("enter")
+                time.sleep(1.5)
+                return
+        time.sleep(0.15)</code></pre>
+                <blockquote>O Handler de Diálogos atua como uma rede de segurança proativa, detectando e resolvendo automaticamente pop-ups comuns do sistema para manter a automação funcionando sem interrupções.</blockquote>
+            </section>
+
+            <hr>
+
+            <section id="chapter6">
+                <h1>Capítulo 6: Logging e Relatórios Operacionais</h1>
+                <p>O componente de Logging e Relatórios é o "escriba" e "repórter" do projeto. Ele registra diligentemente tudo importante que acontece durante o trabalho da automação em um arquivo de log especial e compila um resumo claro no final.</p>
+                <h3>O que o Logging resolve?</h3>
+                <p>Quando uma automação roda, especialmente uma que executa muitas ações, é crucial ter um registro claro de suas atividades. Sem logging e relatórios, você ficaria adivinhando:</p>
+                <ul>
+                    <li><strong>Ela iniciou?</strong> Ainda está rodando?</li>
+                    <li><strong>Quais arquivos foram processados?</strong></li>
+                    <li><strong>Houve erros?</strong> Se sim, <em>onde</em> aconteceram?</li>
+                    <li><strong>Quantos itens foram pulados?</strong></li>
+                </ul>
+                <h3>Estrutura do Log:</h3>
+                <table>
+                    <tr><th>Tipo de Entrada</th><th>Formato</th><th>Exemplo</th></tr>
+                    <tr><td>Info</td><td>[TIMESTAMP] - [AÇÃO]</td><td>2025-07-04 20:45:43 - [2/5] Copiando arquivo...</td></tr>
+                    <tr><td>Skip</td><td>[TIMESTAMP] - [SKIP]</td><td>2025-07-04 20:45:43 - [SKIP] Linha 1 já OK</td></tr>
+                    <tr><td>Erro</td><td>[TIMESTAMP] - [ERRO]</td><td>2025-07-04 20:45:43 - Linha 3 erro: Acesso negado</td></tr>
+                </table>
+                <pre><code>import logging
+from pathlib import Path
+
+# Configuração do sistema de logging
+log_file = Path(sheet_path).with_name("transfer_log.txt")
+logging.basicConfig(
+    filename=log_file,
+    level=logging.INFO,
+    format="%(asctime)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    encoding="utf-8"
+)
+
+# Durante o processamento
+logging.info(f"[{i+1}/{len(df)}] Copiando {src} → {dst}")
+logging.error(f"Linha {i+1} erro: {e}")</code></pre>
+                <blockquote>O sistema de Logging cria um registro detalhado de todas as operações com timestamps, permitindo transparência total e facilitando a solução de problemas em caso de falhas.</blockquote>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Transfer Automation. Todos os direitos reservados. | <a href="https://github.com/transfer-automation" target="_blank">Visite nosso GitHub</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

